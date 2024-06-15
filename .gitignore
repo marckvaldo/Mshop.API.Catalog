@@ -1,0 +1,11 @@
+src/MShop.Catalog.Domain/obj/
+src/MShop.Core/MShop.Core/obj/
+
+src/MShop.Catalog.Domain/bin/
+src/MShop.Core/MShop.Core/bin/
+
+
+
+tests/Msho.Catalog.UnitTests/obj/
+tests/Msho.Catalog.UnitTests/bin/
+.vs/
