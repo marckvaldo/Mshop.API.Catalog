@@ -1,44 +1,31 @@
-﻿using MShop.Catalog.Domain.Entity;
-using MShop.Core.DomainObject;
-using MShop.Core.Message;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using MShop.Catalog.Domain.Entity;
 
 namespace MShop.Catalog.Domain.Validator
 {
-    public class ProductValidator : Notification
+    public class ProductValidator : AbstractValidator<Product>
     {
-        private readonly Product _product;
-
-        public ProductValidator(Product product, INotification notification) : base(notification)
+        public ProductValidator()
         {
-            _product = product;
-        }
+            // Description
+            RuleFor(product => product.Description)
+                .NotEmpty().WithMessage("{PropertyName} should not be empty.")
+                .MinimumLength(10).WithMessage("{PropertyName} should be at least 10 characters long.")
+                .MaximumLength(1000).WithMessage("{PropertyName} should be at most 1000 characters long.");
 
-        public override INotification Validate()
-        {
-            //Description
-            ValidationDefault.NotNullOrEmpty(_product.Description, nameof(_product.Description), _notifications);
-            ValidationDefault.MinLength(_product.Description, 10, nameof(_product.Description), _notifications);
-            ValidationDefault.MaxLength(_product.Description, 1000, nameof(_product.Description), _notifications);
+            RuleFor(product => product.Name)
+                .NotEmpty().WithMessage("{PropertyName} should not be empty.")
+                .MinimumLength(3).WithMessage("{PropertyName} should be at least 3 characters long.")
+                .MaximumLength(255).WithMessage("{PropertyName} should be at most 255 characters long.");
 
-            //Name
-            ValidationDefault.NotNullOrEmpty(_product.Name, nameof(_product.Name), _notifications);
-            ValidationDefault.MinLength(_product.Name, 3, nameof(_product.Name), _notifications);
-            ValidationDefault.MaxLength(_product.Name, 255, nameof(_product.Name), _notifications);
+            // Price
+            RuleFor(product => product.Price)
+                .GreaterThan(0).WithMessage("{PropertyName} should be a positive number.")
+                .GreaterThanOrEqualTo(0.1M).WithMessage("{PropertyName} should be at least 0.1.");
 
-            //Price
-            ValidationDefault.MustPositive(_product.Price, nameof(_product.Price), _notifications);
-            ValidationDefault.MustBiggerOrEqualThan(_product.Price, 0.1M, nameof(_product.Price), _notifications);
-
-            //stok
-            //ValidationDefault.MustBiggerOrEqualThan(_product.Stock, 0_00, nameof(_product.Stock), _notifications);    
-
-            return _notifications;
-
+            RuleFor(category => category.Id)
+                .NotEmpty().WithMessage("Id is required.")
+                .Must(id => id != Guid.Empty).WithMessage("Id must be a valid GUID.");
         }
 
     }

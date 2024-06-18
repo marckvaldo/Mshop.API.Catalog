@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mshop.Test.Common
+namespace MShop.Catalog.UnitTests.Common
 {
     public abstract class BaseFixture
     {
@@ -13,7 +13,7 @@ namespace Mshop.Test.Common
         public static readonly Faker fakerStatic = new Faker("pt_BR");
         protected BaseFixture()
         {
-            faker = new Faker("pt_BR"); 
+            faker = new Faker("pt_BR");
         }
 
     }

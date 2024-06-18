@@ -1,4 +1,4 @@
-﻿using Mshop.Test.Common;
+﻿using MShop.Catalog.UnitTests.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,8 +71,8 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
 
         public static IEnumerable<object[]> ListNameProductInvalid()
         {
-            //yield return new object[] { InvalidData.GetNameProductGreaterThan255CharactersInvalid() };
-            //yield return new object[] { InvalidData.GetNameProductLessThan3CharactersInvalid() };
+            yield return new object[] { InvalidData.GetNameProductGreaterThan255CharactersInvalid() };
+            yield return new object[] { InvalidData.GetNameProductLessThan3CharactersInvalid() };
             yield return new object[] { "" };
             yield return new object[] { " " };
             yield return new object[] { null };

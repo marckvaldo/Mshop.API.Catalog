@@ -7,10 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MShop.Catalog.Domain\MShop.Catalog.Domain.csproj" />
     <ProjectReference Include="..\MShop.Core\MShop.Core\MShop.Core.csproj" />
   </ItemGroup>
 

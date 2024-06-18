@@ -1,4 +1,5 @@
-﻿using MShop.Catalog.Domain.Entity;
+﻿using FluentValidation;
+using MShop.Catalog.Domain.Entity;
 using MShop.Core.DomainObject;
 using MShop.Core.Message;
 using System;
@@ -9,21 +10,19 @@ using System.Threading.Tasks;
 
 namespace MShop.Catalog.Domain.Validator
 {
-    public class CategoryValidator : Notification
+    public class CategoryValidator : AbstractValidator<Category>
     {
-        private readonly Category _category;
-        public CategoryValidator(Category category, INotification notifications) : base(notifications)
+      
+        public CategoryValidator()
         {
-            _category = category;
-        }
+            RuleFor(category => category.Name)
+                .NotEmpty().WithMessage("Name is required.")
+                .MaximumLength(30).WithMessage("Name must be at most 30 characters long.")
+                .MinimumLength(3).WithMessage("Name must be at least 3 characters long.");
 
-        public override INotification Validate()
-        {
-            ValidationDefault.NotNullOrEmpty(_category.Name, nameof(_category.Name), _notifications);
-            ValidationDefault.MaxLength(_category.Name, 30, nameof(_category.Name), _notifications);
-            ValidationDefault.MinLength(_category.Name, 3, nameof(_category.Name), _notifications);
-            ValidationDefault.NotNullGuid(_category.Id, nameof(_category.Id), _notifications);  
-            return _notifications;
+            RuleFor(category => category.Id)
+                .NotEmpty().WithMessage("Id is required.")
+                .Must(id => id != Guid.Empty).WithMessage("Id must be a valid GUID.");
         }
     }
 }

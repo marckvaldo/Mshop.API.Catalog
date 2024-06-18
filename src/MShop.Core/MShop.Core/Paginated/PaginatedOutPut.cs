@@ -3,8 +3,7 @@
 namespace MShop.Core.Paginated
 {
     public class PaginatedOutPut<TEntity> where TEntity : Entity
-    {
-
+    { 
         public int CurrentPage { get; set; }
 
         public int PerPage { get; set; }

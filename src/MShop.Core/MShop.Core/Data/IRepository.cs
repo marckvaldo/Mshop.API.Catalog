@@ -1,4 +1,5 @@
 ﻿using MShop.Core.DomainObject;
+using MShop.Core.Paginated;
 using System.Linq.Expressions;
 
 namespace MShop.Core.Data
@@ -12,6 +13,7 @@ namespace MShop.Core.Data
         Task<List<TEntity>> GetValuesList();
         Task<List<TEntity>> Filter(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> GetLastRegister(Expression<Func<TEntity, bool>> predicate);
+        Task<PaginatedOutPut<TEntity>> FilterPaginate(PaginatedInPut input, CancellationToken cancellationToken);
         Task<int> SaveChanges();
     }
 }

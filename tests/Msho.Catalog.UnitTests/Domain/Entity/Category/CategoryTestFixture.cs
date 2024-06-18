@@ -1,17 +1,13 @@
-﻿using Mshop.Test.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using MShop.Catalog.UnitTests.Common;
 using BusinessEntity = MShop.Catalog.Domain.Entity;
 
 
-namespace Msho.Catalog.UnitTests.Domain.Entity.Category
+namespace MShop.Catalog.UnitTests.Domain.Entity.Category
 {
     public abstract class CategoryTestFixture : BaseFixture
     {
-        protected CategoryTestFixture():base() { }
+        protected CategoryTestFixture() : base() { }
 
         protected BusinessEntity.Category GetCategoryValid()
         {
@@ -21,7 +17,7 @@ namespace Msho.Catalog.UnitTests.Domain.Entity.Category
         protected BusinessEntity.Category GetCategoryValid(Guid Id, string name, bool isActive = true)
         {
 
-            return new(name, Id,isActive);
+            return new(name, Id, isActive);
         }
 
         protected CategoryFake Fake()
@@ -52,8 +48,8 @@ namespace Msho.Catalog.UnitTests.Domain.Entity.Category
 
         public static IEnumerable<object[]> ListNamesCategoryInvalid()
         {
-            //yield return new object[] { InvalidData.GetNameCategoryGreaterThan30CharactersInvalid() };
-            //yield return new object[] { InvalidData.GetNameCategoryLessThan3CharactersInvalid() };
+            yield return new object[] { InvalidData.GetNameCategoryGreaterThan30CharactersInvalid() };
+            yield return new object[] { InvalidData.GetNameCategoryLessThan3CharactersInvalid() };
             yield return new object[] { "" };
             yield return new object[] { null };
         }

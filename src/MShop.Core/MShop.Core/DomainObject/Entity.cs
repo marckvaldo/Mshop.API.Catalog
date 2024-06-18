@@ -1,14 +1,23 @@
-﻿using MShop.Core.Message;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using MShop.Core.Message;
 using System.Collections.ObjectModel;
+
 
 namespace MShop.Core.DomainObject
 {
     public abstract class Entity
     {
-        public Guid Id { get; set; }
-        protected Entity()
+        public Guid Id { get; private set; }
+        
+        /*protected Entity()
         {
             Id = Guid.NewGuid();
+        }*/
+
+        protected void AddId(Guid id)
+        {
+            Id = id;
         }
 
         private readonly List<DomainEvent> _events = new();
@@ -22,7 +31,7 @@ namespace MShop.Core.DomainObject
         public void ClearEvents()
             => _events?.Clear();
 
-        public virtual void IsValid(INotification notification)
+        public virtual ValidationResult IsValid()
         {
             throw new NotImplementedException();
         }

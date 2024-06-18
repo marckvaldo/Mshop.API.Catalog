@@ -1,11 +1,13 @@
-﻿using MShop.Catalog.Domain.Validator;
-using MShop.Core.Exception;
+﻿using FluentValidation.Results;
+using MShop.Catalog.Domain.Validator;
+using EntityDomain  = MShop.Core.DomainObject;
+
 
 namespace MShop.Catalog.Domain.Entity
 {
-    public class Category
+    public class Category : EntityDomain.Entity
     {
-        public Guid Id { get; private set; }
+
         public string Name { get; private set; }
 
         public bool IsActive { get; private set; }
@@ -19,20 +21,14 @@ namespace MShop.Catalog.Domain.Entity
         {
             Name = name;
             IsActive = isActive;
-            Id = id;
+            AddId(id);
 
         }
 
-        public void IsValid(Core.Message.INotification notification)
+        public ValidationResult IsValid()
         {
-            var categoryValidador = new CategoryValidator(this, notification);
-            categoryValidador.Validate();
-            if (notification.HasErrors())
-            {
-                throw new EntityValidationException("Validation errors");
-            }
-
+            var categoryValidador = new CategoryValidator().Validate(this);
+            return categoryValidador;
         }
-
     }
 }

@@ -18,10 +18,10 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
         {
             var valid = GetProductValid(Guid.NewGuid());
             var product = GetProductValid(Fake(valid.Id,valid.Description, valid.Name, valid.Price, valid.CategoryId, valid.Stock, valid.IsActive));
-            product.IsValid(_notifications);
+            var result = product.IsValid();
 
             Assert.NotNull(product);
-            Assert.False(_notifications.HasErrors());
+            Assert.True(result.IsValid);
             Assert.Equal(product.Name, valid.Name);
             Assert.Equal(product.Description, valid.Description);
             Assert.Equal(product.Price, valid.Price);
@@ -51,12 +51,11 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Fake().IsActive);
 
             var product = GetProductValid(validade);
+            var result = product.IsValid();
+           
 
-            Action action = () => product.IsValid(_notifications);
-            var exception = Assert.Throws<EntityValidationException>(action);
-
-            Assert.True(_notifications.HasErrors());
-            Assert.Equal("Validation errors", exception.Message);
+            Assert.True(result.Errors.Any());
+            Assert.False(result.IsValid);
 
             Assert.Equal(product.Name, validade.Name);
             Assert.Equal(product.Description, description);
@@ -84,12 +83,11 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Fake().IsActive);
 
             var product = GetProductValid(validade);
-           
-            Action action = () => product.IsValid(_notifications);
-            var exception = Assert.Throws<EntityValidationException>(action);
 
-            Assert.True(_notifications.HasErrors());
-            Assert.Equal("Validation errors", exception.Message);
+            var result = product.IsValid();
+
+            Assert.True(result.Errors.Any());
+            Assert.False(result.IsValid);
             Assert.Equal(product.Name, name);
             Assert.Equal(product.Description, validade.Description);
             Assert.Equal(product.Price, validade.Price);
@@ -119,11 +117,10 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
 
             var product = GetProductValid(validade);
 
-            Action action = () => product.IsValid(_notifications);
-            var exception = Assert.Throws<EntityValidationException>(action);
+            var result = product.IsValid();
 
-            Assert.True(_notifications.HasErrors());
-            Assert.Equal("Validation errors", exception.Message);
+            Assert.True(result.Errors.Any());
+            Assert.False(result.IsValid);
             Assert.Equal(product.Name, validade.Name);
             Assert.Equal(product.Description, validade.Description);
             Assert.Equal(product.Price, price);

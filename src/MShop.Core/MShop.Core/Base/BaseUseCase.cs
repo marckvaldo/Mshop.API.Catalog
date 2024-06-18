@@ -1,4 +1,5 @@
-﻿using MShop.Core.Exception;
+﻿using FluentValidation.Results;
+using MShop.Core.Exception;
 using MShop.Core.Message;
 
 
@@ -16,6 +17,21 @@ namespace MShop.Core.Base
         protected void Notify(string menssagem)
         {
             Notifications.AddNotifications(menssagem);
+        }
+
+        protected bool Validate(ValidationResult result)
+        {
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    Notifications.AddNotifications(error.ErrorMessage);
+                }
+                return false;
+            }
+            
+            return true;
+
         }
 
         protected void NotifyException(string menssagem)

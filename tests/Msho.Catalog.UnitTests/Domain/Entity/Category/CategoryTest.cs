@@ -1,7 +1,8 @@
-﻿using MShop.Core.Exception;
+﻿using FluentValidation.Results;
+using MShop.Core.Exception;
 using MShop.Core.Message;
 
-namespace Msho.Catalog.UnitTests.Domain.Entity.Category
+namespace MShop.Catalog.UnitTests.Domain.Entity.Category
 {
     public class CategoryTest : CategoryTestFixture
     {
@@ -21,9 +22,9 @@ namespace Msho.Catalog.UnitTests.Domain.Entity.Category
             var guid = valid.Id;
 
             var category = GetCategoryValid(valid.Id, valid.Name, valid.IsActive);
-            category.IsValid(_notifications);
+            var result = category.IsValid();
 
-            Assert.False(_notifications.HasErrors());
+            Assert.True(result.IsValid);
             Assert.NotNull(category);
             Assert.Equal(valid.Name, category.Name);
             Assert.Equal(valid.IsActive, category.IsActive);
@@ -36,29 +37,22 @@ namespace Msho.Catalog.UnitTests.Domain.Entity.Category
         [MemberData(nameof(ListNamesCategoryInvalid))]
         public void SholdReturnErrorWhenNameIsInvalid(string? name)
         {
-            var category = GetCategoryValid(Guid.NewGuid(),name);
-            Action action =
-                () => category.IsValid(_notifications);
+            var category = GetCategoryValid(Guid.NewGuid(), name);
+            ValidationResult result = category.IsValid();
 
-            var exception = Assert.Throws<EntityValidationException>(action);
-
-            Assert.Equal("Validation errors", exception.Message);
-            Assert.True(_notifications.HasErrors());
-
+            Assert.False(result.IsValid);
+            Assert.True(result.Errors.Any());
         }
 
         [Fact(DisplayName = nameof(SholdReturnErrorWhenIdEmpty))]
         [Trait("Domain", "Category")]
         public void SholdReturnErrorWhenIdEmpty()
         {
-            var category = GetCategoryValid(Guid.Empty, "CategoryTest") ;
-            Action action =
-                () => category.IsValid(_notifications);
+            var category = GetCategoryValid(Guid.Empty, "CategoryTest");
+            var result = category.IsValid();
 
-            var exception = Assert.Throws<EntityValidationException>(action);
-
-            Assert.Equal("Validation errors", exception.Message);
-            Assert.True(_notifications.HasErrors());
+            Assert.False(result.IsValid);
+            Assert.True(result.Errors.Any());
 
         }
 

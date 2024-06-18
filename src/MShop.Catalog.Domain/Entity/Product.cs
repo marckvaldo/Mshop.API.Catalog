@@ -1,18 +1,11 @@
-﻿using MShop.Catalog.Domain.Validator;
-using MShop.Core.Exception;
-using MShop.Core.Message;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation.Results;
+using MShop.Catalog.Domain.Validator;
+using EntityDomain = MShop.Core.DomainObject;
 
 namespace MShop.Catalog.Domain.Entity
 {
-    public class Product
+    public class Product: EntityDomain.Entity
     {
-        public Guid Id { get; private set; }
         public string Description { get; private set; }
 
         public string Name { get; private set; }
@@ -36,7 +29,7 @@ namespace MShop.Catalog.Domain.Entity
 
         public Product(Guid id,string description, string name, decimal price, Guid categoryId, decimal stock = 0, bool isActive = false) : base()
         {
-            Id = id;
+            AddId(id);
             Description = description;
             Name = name;
             Price = price;
@@ -45,14 +38,10 @@ namespace MShop.Catalog.Domain.Entity
             CategoryId = categoryId;
         }
 
-        public void IsValid(INotification notification)
+        public ValidationResult IsValid()
         {
-            var productValidador = new ProductValidator(this, notification);
-            productValidador.Validate();
-            if (notification.HasErrors())
-            {
-                throw new EntityValidationException("Validation errors");
-            }
+            var productValidador = new ProductValidator().Validate(this);
+            return productValidador;           
         }
 
     }

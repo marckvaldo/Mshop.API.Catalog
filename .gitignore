@@ -1,7 +1,9 @@
 src/MShop.Catalog.Domain/obj/
+src/MShop.Calalog.Application/obj/
 src/MShop.Core/MShop.Core/obj/
 
 src/MShop.Catalog.Domain/bin/
+src/MShop.Calalog.Application/bin/
 src/MShop.Core/MShop.Core/bin/
 
 
