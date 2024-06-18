@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using NSubstitute;
 using MShop.Calalog.Application.UseCases.Category.CreateCategory;
 using MShop.Catalog.Domain.Entity;
 using MShop.Catalog.UnitTests.Common;

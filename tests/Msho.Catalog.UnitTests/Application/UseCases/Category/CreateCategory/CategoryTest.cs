@@ -1,9 +1,8 @@
-﻿using Moq;
-using BusinessEntity = MShop.Catalog.Domain.Entity;
-using MShop.Catalog.Domain.Respositories;
-using MShop.Core.Data;
-using MShop.Core.Exception;
+﻿using MShop.Catalog.Domain.Respositories;
 using MShop.Core.Message;
+using NSubstitute;
+using NSubstitute.ReceivedExtensions;
+using BusinessEntity = MShop.Catalog.Domain.Entity;
 using useCase = MShop.Calalog.Application.UseCases.Category.CreateCategory;
 
 namespace MShop.Catalog.UnitTests.Application.UseCases.Category.CreateCategory
@@ -15,16 +14,16 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.CreateCategory
 
         public async void CreateCategory()
         {
-            var repository = new Mock<ICategoryRepository>();
-            var notification = new Mock<INotification>();
+            var repository = Substitute.For<ICategoryRepository>();
+            var notification = Substitute.For<INotification>();
 
             var request = FakerRequest();
 
-            var useCase = new useCase.CreateCategory(repository.Object, notification.Object);
+            var useCase = new useCase.CreateCategory(repository, notification);
             var outPut = await useCase.Handle(request, CancellationToken.None);
 
-            repository.Verify(r => r.Create(It.IsAny<BusinessEntity.Category>(), CancellationToken.None), Times.Once);
-            notification.Verify(n => n.AddNotifications(It.IsAny<string>()), Times.Never);
+            await repository.Received(1).Create(Arg.Any<BusinessEntity.Category>(), CancellationToken.None);
+            notification.Received(0).AddNotifications(Arg.Any<string>());
            
 
             Assert.True(outPut);
@@ -38,17 +37,17 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.CreateCategory
 
         public async void ShouldReturnErrorWhenCreateCategoryInvalid(string name)
         {
-            var repository = new Mock<ICategoryRepository>();
-            var notification = new Mock<INotification>();
+            var repository = Substitute.For<ICategoryRepository>();
+            var notification = Substitute.For<INotification>();
 
             var request = FakerRequest(name, true);
 
-            var useCase = new useCase.CreateCategory(repository.Object, notification.Object);
+            var useCase = new useCase.CreateCategory(repository, notification);
             var outPut = await useCase.Handle(request, CancellationToken.None);
 
             //var exception = Assert.ThrowsAsync<EntityValidationException>(action);
-            repository.Verify(n => n.Create(It.IsAny<BusinessEntity.Category>(), CancellationToken.None), Times.Never);
-            notification.Verify(n => n.AddNotifications(It.IsAny<string>()), Times.AtMost(2)) ;
+            await repository.Received(0).Create(Arg.Any<BusinessEntity.Category>(), CancellationToken.None);      
+            notification.Received().AddNotifications(Arg.Any<string>());
         }
     }
 }

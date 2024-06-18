@@ -1,9 +1,8 @@
-﻿using Moq;
-using MShop.Calalog.Application.UseCases.Category.ListCategories;
+﻿using MShop.Calalog.Application.UseCases.Category.ListCategories;
 using MShop.Catalog.Domain.Respositories;
 using MShop.Core.Enum.Paginated;
-using MShop.Core.Message;
 using MShop.Core.Paginated;
+using NSubstitute;
 using ApplicationUseCases = MShop.Calalog.Application.UseCases.Category.ListCategories;
 using BusinessEntity = MShop.Catalog.Domain.Entity;
 
@@ -16,7 +15,7 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.ListCategories
 
         public async void ListCategory()
         {
-            var repository = new Mock<ICategoryRepository>();
+            var repository = Substitute.For<ICategoryRepository>();
            
             var categorys = FakerCategorys(10);
 
@@ -24,9 +23,9 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.ListCategories
 
             var request = new ListCategoryInput(1, 10, "", "Name", SearchOrder.Desc);
 
-            repository.Setup(r => r.FilterPaginate(It.IsAny<PaginatedInPut>(), CancellationToken.None)).ReturnsAsync(result);
+            repository.FilterPaginate(Arg.Any<PaginatedInPut>(), CancellationToken.None).Returns(result);
 
-            var useCase = new ApplicationUseCases.ListCategories(repository.Object);
+            var useCase = new ApplicationUseCases.ListCategories(repository);
             var outPut = await useCase.Handle(request, CancellationToken.None);
 
             Assert.NotNull(outPut);

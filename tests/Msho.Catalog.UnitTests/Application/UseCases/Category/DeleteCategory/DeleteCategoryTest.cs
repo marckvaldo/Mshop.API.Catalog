@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
-using Moq;
-using MShop.Catalog.Domain.Respositories;
-using MShop.Core.Data;
-using MShop.Core.Exception;
+﻿using MShop.Catalog.Domain.Respositories;
 using MShop.Core.Message;
+using NSubstitute;
 using BusinessEntity = MShop.Catalog.Domain.Entity;
 using useCase = MShop.Calalog.Application.UseCases.Category.DeleteCategory;
 
@@ -16,24 +13,24 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.DeleteCategory
 
         public async void DeleteCategory()
         {
-            var repository = new Mock<ICategoryRepository>();
-            var notification = new Mock<INotification>();
-            var repositoryProduct = new Mock<IProductRepository>();
+            var repository = Substitute.For<ICategoryRepository>();
+            var notification = Substitute.For<INotification>();
+            var repositoryProduct = Substitute.For<IProductRepository>();
 
             var category = Faker(Guid.NewGuid());
 
-            //repositoryProduct.Setup(r => r.GetProductsByCategoryId(It.IsAny<Guid>())).ReturnsAsync(FakerProducts(6,FakerCategory()));
-            repository.Setup(r => r.GetById(It.IsAny<Guid>())).ReturnsAsync(category);
+            //repositoryProduct.Setup(r => r.GetProductsByCategoryId(Arg.Any<Guid>())).ReturnsAsync(FakerProducts(6,FakerCategory()));
+            repository.GetById(Arg.Any<Guid>()).Returns(category);
 
             var useCase = new useCase.DeleteCategory(
-                repository.Object, 
-                repositoryProduct.Object, 
-                notification.Object);
+                repository, 
+                repositoryProduct, 
+                notification);
 
             var outPut = await useCase.Handle(new useCase.DeleteCategoryInput(category.Id), CancellationToken.None);
 
-            repository.Verify(r => r.GetById(It.IsAny<Guid>()), Times.Once);
-            notification.Verify(n => n.AddNotifications(It.IsAny<string>()), Times.Never);            
+            await repository.Received(1).GetById(Arg.Any<Guid>());
+            notification.Received(0).AddNotifications(Arg.Any<string>());         
 
             Assert.True(outPut);
         }
@@ -45,23 +42,23 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.DeleteCategory
 
         public async void ShouldReturnErroWhenDeleteCategoryNotFound()
         {
-            var repository = new Mock<ICategoryRepository>();
-            var notification = new Mock<INotification>();
-            var repositoryProduct = new Mock<IProductRepository>();
+            var repository = Substitute.For<ICategoryRepository>();
+            var notification = Substitute.For<INotification>();
+            var repositoryProduct = Substitute.For<IProductRepository>();
 
             var category = Faker(Guid.NewGuid());
 
             var useCase = new useCase.DeleteCategory(
-                repository.Object, 
-                repositoryProduct.Object, 
-                notification.Object);
+                repository, 
+                repositoryProduct, 
+                notification);
 
             var outPut = await useCase.Handle(new useCase.DeleteCategoryInput(category.Id), CancellationToken.None);
 
             //var exception = Assert.ThrowsAsync<ApplicationValidationException>(action);
-            repository.Verify(n => n.DeleteById(It.IsAny<BusinessEntity.Category>(), CancellationToken.None), Times.Never);          
-            notification.Verify(n => n.AddNotifications(It.IsAny<string>()), Times.Once);
-            repositoryProduct.Verify(n => n.GetProductsByCategoryId(It.IsAny<Guid>()), Times.Never);
+            await repository.Received(0).DeleteById(Arg.Any<BusinessEntity.Category>(), CancellationToken.None);         
+            notification.Received(1).AddNotifications(Arg.Any<string>());
+            await repositoryProduct.Received(0).GetProductsByCategoryId(Arg.Any<Guid>());
 
             Assert.False(outPut);
 
@@ -74,29 +71,29 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.DeleteCategory
 
         public async void ShouldReturnErroWhenDeleteCategoryWhenThereAreSameProducts()
         {
-            var repository = new Mock<ICategoryRepository>();
-            var repositoryProduct = new Mock<IProductRepository>();
-            var notification = new Mock<INotification>();
+            var repository = Substitute.For<ICategoryRepository>();
+            var repositoryProduct = Substitute.For<IProductRepository>();
+            var notification = Substitute.For<INotification>();
           
 
             var category = Faker(Guid.NewGuid());
             var product = FakerProducts(3, category);
 
-            repository.Setup(r => r.GetById(It.IsAny<Guid>())).ReturnsAsync(category);
-            repositoryProduct.Setup(r => r.GetProductsByCategoryId(It.IsAny<Guid>())).ReturnsAsync(product);
+            repository.GetById(Arg.Any<Guid>()).Returns(category);
+            repositoryProduct.GetProductsByCategoryId(Arg.Any<Guid>()).Returns(product);
             
 
             var useCase = new useCase.DeleteCategory(
-                repository.Object, 
-                repositoryProduct.Object, 
-                notification.Object);
+                repository, 
+                repositoryProduct, 
+                notification);
 
             var outPut = await useCase.Handle(new useCase.DeleteCategoryInput(category.Id), CancellationToken.None);
 
             //var exception = Assert.ThrowsAsync<ApplicationValidationException>(action);
-            repository.Verify(n => n.GetById(It.IsAny<Guid>()), Times.Once);
-            repository.Verify(n => n.DeleteById(It.IsAny<BusinessEntity.Category>(), CancellationToken.None), Times.Never);
-            notification.Verify(n => n.AddNotifications(It.IsAny<string>()), Times.Once);
+            await repository.Received(1).GetById(Arg.Any<Guid>());
+            await repository.Received(0).DeleteById(Arg.Any<BusinessEntity.Category>(), CancellationToken.None);
+            notification.Received(1).AddNotifications(Arg.Any<string>());
 
             Assert.False(outPut);
 
