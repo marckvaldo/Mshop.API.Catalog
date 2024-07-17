@@ -15,6 +15,11 @@ namespace MShop.Core.Paginated
 
         public SearchOrder Order { get; set; }
 
+        //(1-1)*10=0
+        //(2-1)*10=10
+        //(3-1)*10=20
+        public int From => (Page - 1) * PerPage;
+
         public PaginatedInPut(int page = 1, int perPage = 20, string search = "", string orderBy = "", SearchOrder order = SearchOrder.Asc)
         {
             Page = page;
@@ -23,6 +28,8 @@ namespace MShop.Core.Paginated
             OrderBy = orderBy;
             Order = order;
         }
+
+
 
     }
 }

@@ -24,7 +24,7 @@ namespace MShop.Calalog.Application.UseCases.Category.DeleteCategory
             {
                 Notify("Id não pode ser vazio");
                 return false;
-            };
+            }
 
             var categoryDb = await _categoryRepository.GetById(request.Id);
             if (categoryDb is null)
@@ -34,7 +34,7 @@ namespace MShop.Calalog.Application.UseCases.Category.DeleteCategory
             }
 
             var isThereProduct = await _productRepository.GetProductsByCategoryId(request.Id);
-            if(isThereProduct is not null) 
+            if(isThereProduct.Count() > 0) 
             {
                 Notify($"Não é possivel deletar uma categoria quando a mesma exitem produtos relacionada!");
                 return false;

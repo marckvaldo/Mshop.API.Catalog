@@ -6,7 +6,7 @@ namespace MShop.Core.Data
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
-        Task Create(TEntity entity, CancellationToken cancellationToken);
+        Task<bool> Create(TEntity entity, CancellationToken cancellationToken);
         Task Update(TEntity entity, CancellationToken cancellationToken);
         Task DeleteById(TEntity entity, CancellationToken cancellationToken);
         Task<TEntity?> GetById(Guid Id);
