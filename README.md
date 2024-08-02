@@ -23,7 +23,7 @@ Pretendo aplicar essa API em uma arquitetura de microserviço em um futuro próx
 - Cacheamento com Redis
 
 <h4> 
-	🚧  API produtos 🚀 Em construção...  🚧
+	🚧  API Catalago de Produto 🚀 Em construção...  🚧
 </h4>
 
 ### Pré-requisitos
