@@ -1,18 +1,18 @@
-# API de catalago de produtos 
+# API de Catalago de Produtos
 
 <div style="background-color: #f0f0f0; height:20vh; display: flex; flex-direction: row; justify-content: center;">
 <img src="https://github.com/marckvaldo/Mshop.API.Product/blob/main/images/eshoponcontainers-reference-application-architecture.png">
 </div>
 
 ## Descrição do Projeto
-Esse projeto tem o intuito de aplicar conceitos importantes como;
+Esse projeto é um microserviço de catalago de produto para um E-commerce (Mshopping) tem o intuito de aplicar conceitos importantes como;
 - Teste automatizado (TDD)
-- Cacheamento com Redis
 - Arquitetura hexagonal
 - Clean code
 - SOLID.
 - Design Patterns
 - Event Domain
+- Graphql
 
 Pretendo aplicar essa API em uma arquitetura de microserviço em um futuro próximo, aplicandos conceitos de Microserviço como 
 - Messageria
@@ -20,6 +20,7 @@ Pretendo aplicar essa API em uma arquitetura de microserviço em um futuro próx
 - Autenticação com keycloak
 - monitoramento
 - kubernet
+- Cacheamento com Redis
 
 <h4> 
 	🚧  API produtos 🚀 Em construção...  🚧
@@ -33,6 +34,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Dot.net (6.0)](https://dotnet.microsoft.com/en-us/download/dotnet/6.0). <br/>
 [Mysql](https://www.mysql.com/downloads/).<br/>
 [RabbitMQ](https://www.rabbitmq.com/download.html). (Recomendo fortmento caso você esteja no windows executar no docker)<br/>
+[Elasticsearch](https://www.elastic.co/pt/elasticsearch). <br/>
 
 Além disso é bom ter um editor de código para trabalhar como [VSCode](https://code.visualstudio.com/)
 ou se prefeir uma IDE, o velhor e bom [Visual Estudio 2022](https://visualstudio.microsoft.com/pt-br/downloads/).
@@ -68,6 +70,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Mysql](https://www.mysql.com/)
 - [RabbitMQ](https://www.rabbitmq.com/)
 - [Docker](https://www.docker.com/)
+- [Kibana](https://www.elastic.co/pt/kibana).
+- [Elasticsearch](https://www.elastic.co/pt/elasticsearch).
+- [GraphQL](https://graphql.org/).
 
 
 #📝 Licença
