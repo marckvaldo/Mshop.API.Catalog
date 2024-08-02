@@ -12,7 +12,7 @@ Esse projeto é um microserviço de catalago de produto para um E-commerce (Msho
 - SOLID.
 - Design Patterns
 - Event Domain
-- Graphql
+- GraphQL
 
 Pretendo aplicar essa API em uma arquitetura de microserviço em um futuro próximo, aplicandos conceitos de Microserviço como 
 - Messageria
