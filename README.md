@@ -1,11 +1,11 @@
-# API de Catalago de Produtos
+# API de Catalogo de Produtos
 
 <div style="background-color: #f0f0f0; height:20vh; display: flex; flex-direction: row; justify-content: center;">
 <img src="https://github.com/marckvaldo/Mshop.API.Product/blob/main/images/eshoponcontainers-reference-application-architecture.png">
 </div>
 
 ## Descrição do Projeto
-Esse projeto é um microserviço de catalago de produto para um E-commerce (Mshopping) tem o intuito de aplicar conceitos importantes como;
+Esse projeto é um microserviço de catalogo de produto para um E-commerce (Mshopping) tem o intuito de aplicar conceitos importantes como;
 - Teste automatizado (TDD)
 - Arquitetura hexagonal
 - Clean code
@@ -23,7 +23,7 @@ Pretendo aplicar essa API em uma arquitetura de microserviço em um futuro próx
 - Cacheamento com Redis
 
 <h4> 
-	🚧  API Catalago de Produto 🚀 Em construção...  🚧
+	🚧  API Catalogo de Produto 🚀 Em construção...  🚧
 </h4>
 
 ### Pré-requisitos
