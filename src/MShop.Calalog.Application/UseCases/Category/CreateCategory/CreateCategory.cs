@@ -6,7 +6,7 @@ using DominEntity = MShop.Catalog.Domain.Entity;
 
 namespace MShop.Calalog.Application.UseCases.Category.CreateCategory
 {
-    public class CreateCategory : BaseUseCase, IRequestHandler<CreateCategoryInPut, bool>
+    public class CreateCategory : BaseUseCase, IRequestHandler<CreateCategoryInput, bool>
     {
         private ICategoryRepository _categoryRepository;
         public CreateCategory(ICategoryRepository categoryRepository,
@@ -15,10 +15,20 @@ namespace MShop.Calalog.Application.UseCases.Category.CreateCategory
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<bool> Handle(CreateCategoryInPut request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateCategoryInput request, CancellationToken cancellationToken)
         {
             var category = new DominEntity.Category(request.Name, request.Id, request.IsActive);
+
             if(!Validate(category.IsValid())) return false;
+
+            /*var isThereCategory = await _categoryRepository.GetById(category.Id);
+            if(isThereCategory == null)
+            {
+                Notify($"Category na existe");
+                return false;
+            }*/
+
+
             await _categoryRepository.Create(category,cancellationToken);
             return true;
 

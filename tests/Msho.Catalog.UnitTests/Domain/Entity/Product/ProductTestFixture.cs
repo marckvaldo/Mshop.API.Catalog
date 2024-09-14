@@ -11,19 +11,27 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
     public class ProductTestFixture: BaseFixture
     {
         private readonly Guid _categoryId;
+        private readonly string _categoryName;
+        private readonly string _image;
 
         protected ProductTestFixture()
         {
             _categoryId = Guid.NewGuid();
+            _categoryName = faker.Commerce.ProductName()[1..10];
+            _image = faker.Image.PicsumUrl();
         }
 
         protected BusinessEntity.Product GetProductValid(Guid id)
         {
-            return new(id, Fake().Description, Fake().Name, Fake().Price, Fake().CategoryId, Fake().Stock, Fake().IsActive);
+            BusinessEntity.Product produto = new(id, Fake().Description, Fake().Name, Fake().Price, _image);
+            produto.AddCategory(new BusinessEntity.Category(_categoryName, _categoryId));
+            return produto;
         }
         protected BusinessEntity.Product GetProductValid(ProductFake fake)
         {
-            return new(fake.Id, fake.Description, fake.Name, fake.Price, fake.CategoryId, fake.Stock, fake.IsActive);
+            BusinessEntity.Product produto = new(fake.Id, fake.Description, fake.Name, fake.Price, _image, fake.Stock);
+            produto.AddCategory(new BusinessEntity.Category(_categoryName, _categoryId));
+            return produto;
         }
 
         protected ProductFake Fake()
@@ -35,7 +43,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Price = Convert.ToDecimal(faker.Commerce.Price()),
                 CategoryId = _categoryId,
                 Stock = faker.Random.UInt(),
-                IsActive = true
+                CategoryName = _categoryName
             };
         }
 
@@ -48,13 +56,12 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Price = Convert.ToDecimal(faker.Commerce.Price()),
                 CategoryId = _categoryId,
                 Stock = faker.Random.UInt(),
-                IsActive = true
             };
 
             return product;
         }
 
-        protected ProductFake Fake(Guid id,string description, string name, decimal price, Guid categoryId, decimal stock, bool isActive = true)
+        protected ProductFake Fake(Guid id,string description, string name, decimal price, Guid categoryId, decimal stock)
         {
             return new ProductFake
             {
@@ -64,12 +71,10 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Price = price,
                 CategoryId = categoryId,
                 Stock = stock,
-                IsActive = isActive
             };
         }
 
-
-        public static IEnumerable<object[]> ListNameProductInvalid()
+          public static IEnumerable<object[]> ListNameProductInvalid()
         {
             yield return new object[] { InvalidData.GetNameProductGreaterThan255CharactersInvalid() };
             yield return new object[] { InvalidData.GetNameProductLessThan3CharactersInvalid() };
@@ -97,6 +102,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
         public decimal Stock { get; set; }
-        public bool IsActive { get; set; }
+        public string CategoryName { get; set; }
     }
+
 }

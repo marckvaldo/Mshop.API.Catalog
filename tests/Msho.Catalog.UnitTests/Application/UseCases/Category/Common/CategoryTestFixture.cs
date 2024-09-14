@@ -39,9 +39,9 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.Common
                     faker.Commerce.ProductName(),
                     faker.Commerce.ProductDescription(),
                     Convert.ToDecimal(faker.Commerce.Price()),
-                    category.Id,
-                    faker.Random.UInt(),
-                    true
+                    faker.Image.PicsumUrl(),
+                    faker.Random.UInt()
+                    //true
                 );
 
             return product;
@@ -68,14 +68,14 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.Common
             return listProduct;
         }
 
-        public CreateCategoryInPut FakerRequest()
+        public CreateCategoryInput FakerRequest()
         {
-            return new CreateCategoryInPut(Guid.NewGuid(),faker.Commerce.Categories(1)[0],true);
+            return new CreateCategoryInput(Guid.NewGuid(),faker.Commerce.Categories(1)[0],true);
         }
 
-        public CreateCategoryInPut FakerRequest(string name, bool isActive)
+        public CreateCategoryInput FakerRequest(string name, bool isActive)
         {
-            return new CreateCategoryInPut(Guid.NewGuid(),name,isActive);
+            return new CreateCategoryInput(Guid.NewGuid(),name,isActive);
         }
     }
 }

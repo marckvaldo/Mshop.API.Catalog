@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MShop.Catalog.API.props" />
+</Project>

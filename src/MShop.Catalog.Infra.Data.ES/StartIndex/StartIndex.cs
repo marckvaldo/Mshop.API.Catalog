@@ -53,8 +53,8 @@ namespace MShop.Catalog.Infra.Data.ES.StartIndex
                         .Number(n => n
                             .Name(product => product.Stock)
                             .Type(NumberType.Float)) // Use NumberType.Float for float fields
-                        .Boolean(b => b
-                            .Name(product => product.IsActive))
+                        //.Boolean(b => b
+                            //.Name(product => product.IsActive))
                         .Boolean(b => b
                             .Name(product => product.IsSale))
                         .Keyword(k => k

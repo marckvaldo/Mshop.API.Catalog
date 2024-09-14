@@ -17,7 +17,14 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
         public void Instantiate()
         {
             var valid = GetProductValid(Guid.NewGuid());
-            var product = GetProductValid(Fake(valid.Id,valid.Description, valid.Name, valid.Price, valid.CategoryId, valid.Stock, valid.IsActive));
+            var product = GetProductValid(Fake(
+                valid.Id,
+                valid.Description, 
+                valid.Name, 
+                valid.Price, 
+                valid.CategoryId, 
+                valid.Stock));
+
             var result = product.IsValid();
 
             Assert.NotNull(product);
@@ -28,7 +35,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
             //Assert.Equal(product.Thumb, valid.Thumb);
             Assert.Equal(product.CategoryId, valid.CategoryId);
             Assert.Equal(product.Stock, valid.Stock);
-            Assert.Equal(product.IsActive, valid.IsActive);
+            //Assert.Equal(product.IsActive, valid.IsActive);
             Assert.Equal(product.Id, valid.Id);
             //Assert.Null(product.Thumb);
 
@@ -47,8 +54,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Fake().Name,
                 Fake().Price,
                 Fake().CategoryId,
-                Fake().Stock,
-                Fake().IsActive);
+                Fake().Stock);
 
             var product = GetProductValid(validade);
             var result = product.IsValid();
@@ -62,7 +68,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
             Assert.Equal(product.Price, validade.Price);
             Assert.Equal(product.CategoryId, validade.CategoryId);
             Assert.Equal(product.Stock, validade.Stock);
-            Assert.Equal(product.IsActive, validade.IsActive);
+            //Assert.Equal(product.IsActive, validade.IsActive);
             //Assert.Null(product.Thumb);
         }
 
@@ -79,8 +85,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 name,
                 Fake().Price,
                 Fake().CategoryId,
-                Fake().Stock,
-                Fake().IsActive);
+                Fake().Stock);
 
             var product = GetProductValid(validade);
 
@@ -93,7 +98,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
             Assert.Equal(product.Price, validade.Price);
             Assert.Equal(product.CategoryId, validade.CategoryId);
             Assert.Equal(product.Stock, validade.Stock);
-            Assert.Equal(product.IsActive, validade.IsActive);
+            //Assert.Equal(product.IsActive, validade.IsActive);
             //Assert.Null(product.Thumb);
         }
 
@@ -112,8 +117,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
                 Fake().Name,
                 price,
                 Fake().CategoryId,
-                Fake().Stock,
-                Fake().IsActive);
+                Fake().Stock);
 
             var product = GetProductValid(validade);
 
@@ -126,7 +130,7 @@ namespace MShop.Catalog.UnitTests.Domain.Entity.Product
             Assert.Equal(product.Price, price);
             Assert.Equal(product.CategoryId, validade.CategoryId);
             Assert.Equal(product.Stock, validade.Stock);
-            Assert.Equal(product.IsActive, validade.IsActive);
+            //Assert.Equal(product.IsActive, validade.IsActive);
             //Assert.Null(product.Thumb);
 
         }

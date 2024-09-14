@@ -28,7 +28,7 @@ namespace MShop.Catalog.Infra.Data.ES.Repositoty
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public Task<List<Product>> Filter(Expression<Func<Product, bool>> predicate)
@@ -80,5 +80,7 @@ namespace MShop.Catalog.Infra.Data.ES.Repositoty
         {
             throw new NotImplementedException();
         }
+
     }
+
 }

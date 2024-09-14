@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using MShop.Catalog.Domain.Respositories;
 using MShop.Catalog.Infra.Data.ES.Model;
 using MShop.Catalog.Infra.Data.ES.Repositoty;
+using MShop.Catalog.Infra.Data.ES.StartIndex;
 using Nest;
+using System;
 
 
 namespace MShop.Catalog.Infra.Data.ES
@@ -47,5 +49,12 @@ namespace MShop.Catalog.Infra.Data.ES
             service.AddScoped<IProductRepository, ProductRepository>();
             return service;
         }
+
+        /*public static IServiceCollection AddIndex(this IServiceCollection service, IServiceProvider serviceProvider)
+        {
+            var index = new StartIndex.StartIndex();
+            index.CreateIndex(serviceProvider);
+            return service;
+        }*/
     }
 }

@@ -10,14 +10,14 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.CreateCategory
 {
     public class CreateCategoryTestFixture : CategoryTestFixture
     {
-        public CreateCategoryInPut FakerRequest()
+        public CreateCategoryInput FakerRequest()
         {
-            return new CreateCategoryInPut(Guid.NewGuid(),faker.Commerce.Categories(1)[0], true);
+            return new CreateCategoryInput(Guid.NewGuid(),faker.Commerce.Categories(1)[0], true);
         }
 
-        public CreateCategoryInPut FakerRequest(string name, bool isActive)
+        public CreateCategoryInput FakerRequest(string name, bool isActive)
         {
-            return new CreateCategoryInPut(Guid.NewGuid(),name,isActive);
+            return new CreateCategoryInput(Guid.NewGuid(),name,isActive);
         }
     }
 }

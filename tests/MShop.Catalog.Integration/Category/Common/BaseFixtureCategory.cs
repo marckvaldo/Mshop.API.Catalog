@@ -51,7 +51,7 @@ namespace MShop.Catalog.Integration.Category.Common
 
         }
 
-        protected Application.CreateCategoryInPut GetCategoryValid()
+        protected Application.CreateCategoryInput GetCategoryValid()
         {
             return new(Guid.NewGuid(), Fake().Name, true);
         }
@@ -61,7 +61,7 @@ namespace MShop.Catalog.Integration.Category.Common
             return new(Fake().Name, Guid.NewGuid(), true);
         }
 
-        protected Application.CreateCategoryInPut GetCategoryValid(Guid Id, string name, bool isActive = true)
+        protected Application.CreateCategoryInput GetCategoryValid(Guid Id, string name, bool isActive = true)
         {
 
             return new(Id, name, true);

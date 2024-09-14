@@ -25,5 +25,8 @@ public class CategoryModelOutPut
 
     public static CategoryModelOutPut FromCategory(Entity.Category category)
         => new CategoryModelOutPut(category.Id, category.Name, category.IsActive);
+
+    public static CategoryModelOutPut Error()
+        => new CategoryModelOutPut(Guid.Empty, string.Empty, false);
     
 }

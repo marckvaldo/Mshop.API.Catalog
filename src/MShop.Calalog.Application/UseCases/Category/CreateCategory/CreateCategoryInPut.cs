@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MShop.Calalog.Application.UseCases.Category.CreateCategory
 {
-    public class CreateCategoryInPut : IRequest<bool>
+    public class CreateCategoryInput : IRequest<bool>
     {
         public Guid Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace MShop.Calalog.Application.UseCases.Category.CreateCategory
 
         public bool IsActive { get; set; }
 
-        public CreateCategoryInPut(Guid id, string name, bool isActive)
+        public CreateCategoryInput(Guid id, string name, bool isActive)
         {
             Id = id;
             Name = name;

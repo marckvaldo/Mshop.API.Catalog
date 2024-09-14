@@ -35,7 +35,7 @@ namespace MShop.Catalog.Infra.Data.ES.Repositoty
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public Task<List<Category>> Filter(Expression<Func<Category, bool>> predicate)

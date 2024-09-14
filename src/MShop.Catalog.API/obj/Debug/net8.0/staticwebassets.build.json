@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "hjNCiPkqRqD9RoN7gfxZJD+GnZyFFvs+Fb3aCYtoAVc=",
+  "Source": "MShop.Catalog.API",
+  "BasePath": "_content/MShop.Catalog.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -34,7 +34,7 @@ namespace MShop.Calalog.Application.UseCases.Category.DeleteCategory
             }
 
             var isThereProduct = await _productRepository.GetProductsByCategoryId(request.Id);
-            if(isThereProduct.Count() > 0) 
+            if(isThereProduct?.Count() > 0) 
             {
                 Notify($"Não é possivel deletar uma categoria quando a mesma exitem produtos relacionada!");
                 return false;

@@ -1891,6 +1891,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "MShop.Catalog.Domain": "1.0.0",
+          "MShop.Catalog.Infra.Data.ES": "1.0.0",
           "MShop.Core": "1.0.0",
           "MediatR": "12.3.0"
         },

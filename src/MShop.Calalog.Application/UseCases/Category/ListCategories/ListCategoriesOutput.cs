@@ -12,7 +12,8 @@ namespace MShop.Calalog.Application.UseCases.Category.ListCategories
 {
     public class ListCategoriesOutput : PaginatedListOutPut<CategoryModelOutPut>
     {
-        public ListCategoriesOutput(int currentPage, int perPage, int total, IReadOnlyList<CategoryModelOutPut> itens) : base(currentPage, perPage, total, itens)
+        public ListCategoriesOutput(int currentPage, int perPage, int total, IReadOnlyList<CategoryModelOutPut> itens) :
+            base(currentPage, perPage, total, itens)
         {
 
         }
