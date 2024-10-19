@@ -31,9 +31,9 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.Common
             yield return new object[] { null };
         }
 
-        public Product FakerProduct(BusinessEntity.Category category)
+        public BusinessEntity.Product FakerProduct(BusinessEntity.Category category)
         {
-            var product = new Product
+            var product = new BusinessEntity.Product
                 (
                     Guid.NewGuid(),
                     faker.Commerce.ProductName(),
@@ -59,9 +59,9 @@ namespace MShop.Catalog.UnitTests.Application.UseCases.Category.Common
             return category;
         }
 
-        public List<Product> FakerProducts(int quantity, BusinessEntity.Category category)
+        public List<BusinessEntity.Product> FakerProducts(int quantity, BusinessEntity.Category category)
         {
-            List<Product> listProduct = new List<Product>();
+            List<BusinessEntity.Product> listProduct = new List<BusinessEntity.Product>();
             for (int i = 1; i <= quantity; i++)
                 listProduct.Add(FakerProduct(category));
 

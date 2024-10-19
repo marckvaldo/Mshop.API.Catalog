@@ -18,6 +18,8 @@ namespace MShop.Catalog.Infra.Data.ES.Model
 
         public Guid CategoryId { get; set; }
 
+        public string Category { get; set; }
+
         public string Thumb { get; private set; }
 
 
@@ -31,12 +33,16 @@ namespace MShop.Catalog.Infra.Data.ES.Model
                Price = Entity.Price, 
                Stock = Entity.Stock, 
                CategoryId = Entity.CategoryId, 
-               Thumb = Entity?.Thumb?.Path 
+               Thumb = Entity?.Thumb?.Path,
+               Category = Entity.Category.Name
            };
 
         public static Product ModelToEntity(ProductModel Model)
         {
-            return new Product(Model.Id, Model.Description, Model.Name, Model.Price, Model.Thumb, Model.Stock);
+            var category = new Category(Model.Category, Model.CategoryId, true);
+            var product = new Product(Model.Id, Model.Description, Model.Name, Model.Price, Model.Thumb, Model.Stock);
+            product.AddCategory(category);
+            return product;
         }
 
         public static List<Product> ListModelToListEntity(IEnumerable<ProductModel> productModels)

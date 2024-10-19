@@ -17,7 +17,7 @@ namespace MShop.Catalog.Infra.Messaging.Consumers
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<ProductConsumer> _logger;
-        private readonly RabbitMQConfiguration _rabbitMQConfiguration;
+        //private readonly RabbitMQConfiguration _rabbitMQConfiguration;
         private readonly string _queue;
         private readonly IModel _channel;
        
@@ -26,12 +26,12 @@ namespace MShop.Catalog.Infra.Messaging.Consumers
             IServiceProvider serviceProvider, 
             ILogger<ProductConsumer> logger,
             IModel channel, 
-            IOptions<RabbitMQConfiguration> _rabbitMQConfiguration)
+            IOptions<RabbitMQConfiguration> rabbitMQConfiguration)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
             _channel = channel; 
-            _queue = _rabbitMQConfiguration.Value.QueueProducts;
+            _queue = rabbitMQConfiguration.Value.QueueProducts;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

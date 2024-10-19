@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MShop.Catalog.Infra.Messaging")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66d24b61a59697579eaa8c7018bcd76b9b4a3a65")]
 [assembly: System.Reflection.AssemblyProductAttribute("MShop.Catalog.Infra.Messaging")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MShop.Catalog.Infra.Messaging")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
