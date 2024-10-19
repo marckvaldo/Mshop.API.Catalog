@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MShop.Catalog.Infra.Data.ES")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66d24b61a59697579eaa8c7018bcd76b9b4a3a65")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ad16dacda9a7f7f66cdb76227b11ac180fc274b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MShop.Catalog.Infra.Data.ES")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MShop.Catalog.Infra.Data.ES")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
