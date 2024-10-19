@@ -59,7 +59,7 @@ $ docker-compose up -d
 #### API
 <img src="https://github.com/marckvaldo/Mshop.API.Product/blob/main/images/Images.jpg">
 
-### 🛠 Configuração
+### 🛠 Configurações
 Todas as configurações do projeto estão em Mshop.API.Product\src\MShop.Calalog.API\appsettings.Development.json
 
 ### 🛠 Tecnologias
